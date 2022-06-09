@@ -35,7 +35,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -45,7 +45,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
@@ -109,7 +109,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -119,7 +119,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
  * Licensed to The Apereo Foundation under one or more contributor license
@@ -412,7 +412,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_paella_core__;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"module":"dist/matomoTrackingDataPlugin.js","name":"paella7-matomo","version":"1.0.0","description":"Enables Matomo tracking in Paella player 7","main":"index.js","scripts":{"build":"webpack --mode development --config webpack.config.js","dev":"webpack serve --mode development --config webpack.debug.js"},"repository":{"type":"git","url":"git+https://github.com/educast-nrw/paella7-matomo.git"},"keywords":["paella","matomo","webplayer","webtracking"],"author":"Maximiliano Lira Del Canto","license":"ECL-2.0","bugs":{"url":"https://github.com/educast-nrw/paella7-matomo/issues"},"homepage":"https://github.com/educast-nrw/paella7-matomo#readme","dependencies":{"paella-core":"^1.0.51"},"devDependencies":{"@babel/core":"^7.18.0","@babel/preset-env":"^7.18.0","babel-loader":"^8.2.5","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.1","file-loader":"^6.2.0","html-webpack-plugin":"^5.5.0","style-loader":"^3.3.1","svg-inline-loader":"^0.8.2","webpack":"^5.72.1","webpack-cli":"^4.9.2","webpack-dev-server":"^4.9.0"}}');
+module.exports = JSON.parse('{"module":"dist/paella-matomo-plugin.js","name":"paella7-matomo","version":"1.0.0","description":"Enables Matomo tracking in Paella player 7","main":"src/index.js","scripts":{"build":"webpack --mode development --config webpack.config.js","dev":"webpack serve --mode development --config webpack.debug.js"},"repository":{"type":"git","url":"git+https://github.com/educast-nrw/paella7-matomo.git"},"keywords":["paella","matomo","webplayer","webtracking"],"author":"Maximiliano Lira Del Canto","license":"ECL-2.0","bugs":{"url":"https://github.com/educast-nrw/paella7-matomo/issues"},"homepage":"https://github.com/educast-nrw/paella7-matomo#readme","dependencies":{"paella-core":"^1.0.51"},"devDependencies":{"@babel/core":"^7.12.16","@babel/preset-env":"^7.12.16","babel-loader":"^8.2.2","copy-webpack-plugin":"^7.0.0","css-loader":"^5.0.1","file-loader":"^6.2.0","html-webpack-plugin":"^4.5.1","style-loader":"^2.0.0","svg-inline-loader":"^0.8.2","webpack":"^5.66.0","webpack-cli":"^4.9.1","webpack-dev-server":"^4.7.3"}}');
 
 /***/ })
 
