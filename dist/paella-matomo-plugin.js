@@ -20,7 +20,7 @@ return /******/ (() => { // webpackBootstrap
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ matomoTracking)
+/* harmony export */   "default": () => (/* binding */ MatomoTracking)
 /* harmony export */ });
 /* harmony import */ var paella_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! paella-core */ "paella-core");
 /* harmony import */ var paella_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(paella_core__WEBPACK_IMPORTED_MODULE_0__);
@@ -50,18 +50,18 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var matomoTracking = /*#__PURE__*/function (_PluginModule) {
-  _inherits(matomoTracking, _PluginModule);
+var MatomoTracking = /*#__PURE__*/function (_PluginModule) {
+  _inherits(MatomoTracking, _PluginModule);
 
-  var _super = _createSuper(matomoTracking);
+  var _super = _createSuper(MatomoTracking);
 
-  function matomoTracking() {
-    _classCallCheck(this, matomoTracking);
+  function MatomoTracking() {
+    _classCallCheck(this, MatomoTracking);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(matomoTracking, [{
+  _createClass(MatomoTracking, [{
     key: "moduleName",
     get: function get() {
       return 'paella-matomo-plugin';
@@ -73,23 +73,23 @@ var matomoTracking = /*#__PURE__*/function (_PluginModule) {
     }
   }]);
 
-  return matomoTracking;
+  return MatomoTracking;
 }(paella_core__WEBPACK_IMPORTED_MODULE_0__.PluginModule);
 
 
 
 /***/ }),
 
-/***/ "./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js":
-/*!*********************************************************************!*\
-  !*** ./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js ***!
-  \*********************************************************************/
+/***/ "./src/plugins/org.opencast.paella.matomoTrackingData.js":
+/*!***************************************************************!*\
+  !*** ./src/plugins/org.opencast.paella.matomoTrackingData.js ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ matomoTrackingDataPlugin)
+/* harmony export */   "default": () => (/* binding */ MatomoTrackingDataPlugin)
 /* harmony export */ });
 /* harmony import */ var paella_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! paella-core */ "paella-core");
 /* harmony import */ var paella_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(paella_core__WEBPACK_IMPORTED_MODULE_0__);
@@ -143,18 +143,18 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  */
 
 
-var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
-  _inherits(matomoTrackingDataPlugin, _DataPlugin);
+var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
+  _inherits(MatomoTrackingDataPlugin, _DataPlugin);
 
-  var _super = _createSuper(matomoTrackingDataPlugin);
+  var _super = _createSuper(MatomoTrackingDataPlugin);
 
-  function matomoTrackingDataPlugin() {
-    _classCallCheck(this, matomoTrackingDataPlugin);
+  function MatomoTrackingDataPlugin() {
+    _classCallCheck(this, MatomoTrackingDataPlugin);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(matomoTrackingDataPlugin, [{
+  _createClass(MatomoTrackingDataPlugin, [{
     key: "load",
     value: function () {
       var _load = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -354,7 +354,7 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
     }
   }]);
 
-  return matomoTrackingDataPlugin;
+  return MatomoTrackingDataPlugin;
 }(paella_core__WEBPACK_IMPORTED_MODULE_0__.DataPlugin);
 
 
@@ -369,7 +369,7 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
 
 var map = {
 	"./matomoTracking.js": "./src/plugins/matomoTracking.js",
-	"./org.opencast.paella.matomoTrackingDataPlugin.js": "./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js"
+	"./org.opencast.paella.matomoTrackingData.js": "./src/plugins/org.opencast.paella.matomoTrackingData.js"
 };
 
 
@@ -493,11 +493,15 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MatomoTrackingDataPlugin": () => (/* binding */ MatomoTrackingDataPlugin),
 /* harmony export */   "default": () => (/* binding */ getMatomoPluginContext)
 /* harmony export */ });
+/* harmony import */ var _plugins_org_opencast_paella_matomoTrackingData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/org.opencast.paella.matomoTrackingData */ "./src/plugins/org.opencast.paella.matomoTrackingData.js");
+
 function getMatomoPluginContext() {
   return __webpack_require__("./src/plugins sync recursive \\.js");
 }
+var MatomoTrackingDataPlugin = _plugins_org_opencast_paella_matomoTrackingData__WEBPACK_IMPORTED_MODULE_0__["default"];
 })();
 
 /******/ 	return __webpack_exports__;
