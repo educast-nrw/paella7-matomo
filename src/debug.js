@@ -1,9 +1,9 @@
 import { Paella } from 'paella-core';
-import getTutorialPluginContext from './index';
+import getMatomoPluginContext from './index';
 
 const initParams = {
     customPluginContext: [
-        getTutorialPluginContext()
+        getMatomoPluginContext()
     ]
 };
 

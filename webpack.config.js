@@ -4,8 +4,8 @@ const config = require('./webpack.common');
 config.entry = './src/index.js',
 config.output = {
     path: path.join(__dirname, "dist"),
-    filename: 'matomoTrackingDataPlugin.js',
-    library: 'matomoTrackingDataPlugin',
+    filename: 'paella-matomo-plugin.js',
+    library: 'paella-matomo-plugin',
     libraryTarget: 'umd'
 };
 config.externals = {

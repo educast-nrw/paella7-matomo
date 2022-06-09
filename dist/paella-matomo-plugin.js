@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["paella-core"], factory);
 	else if(typeof exports === 'object')
-		exports["matomoTrackingDataPlugin"] = factory(require("paella-core"));
+		exports["paella-matomo-plugin"] = factory(require("paella-core"));
 	else
-		root["matomoTrackingDataPlugin"] = factory(root[undefined]);
+		root["paella-matomo-plugin"] = factory(root[undefined]);
 })(self, (__WEBPACK_EXTERNAL_MODULE_paella_core__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
@@ -155,55 +155,13 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
   }
 
   _createClass(matomoTrackingDataPlugin, [{
-    key: "isEnabled",
+    key: "load",
     value: function () {
-      var _isEnabled = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, data, enabled;
+      var _load = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var client_id, heartbeat, tracking_client, server, site_id, matomoPromise, matomoScript;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return fetch('/usertracking/detailenabled');
-
-              case 3:
-                response = _context.sent;
-                _context.next = 6;
-                return response.text();
-
-              case 6:
-                data = _context.sent;
-                enabled = /true/i.test(data);
-                return _context.abrupt("return", enabled);
-
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](0);
-                return _context.abrupt("return", false);
-
-              case 14:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 11]]);
-      }));
-
-      function isEnabled() {
-        return _isEnabled.apply(this, arguments);
-      }
-
-      return isEnabled;
-    }()
-  }, {
-    key: "load",
-    value: function () {
-      var _load = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var client_id, heartbeat, tracking_client, server, site_id, matomoPromise, matomoScript;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
               case 0:
                 client_id = this.config.client_id;
                 heartbeat = this.config.heartbeat;
@@ -235,12 +193,12 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
                 };
 
                 if (server.substr(-1) != '/') server += '/';
-                _context2.next = 10;
+                _context.next = 10;
                 return matomoScript(server + tracking_client + '.js');
 
               case 10:
-                this.player.matomotracker = Matomo.getAsyncTracker(server + tracking_client + '.php', site_id); //this.player.log.debug('Matomo Analytics Initialized: ' + Matomo.initialized);
-
+                this.player.matomotracker = Matomo.getAsyncTracker(server + tracking_client + '.php', site_id);
+                this.player.log.debug('Matomo Analytics Initialized: ' + Matomo.initialized);
                 this.player.matomotracker.client_id = client_id;
                 if (heartbeat && heartbeat > 0) this.player.matomotracker.enableHeartBeatTimer(heartbeat);
 
@@ -251,12 +209,12 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
                   this.registerVisit();
                 }
 
-              case 14:
+              case 15:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee, this);
       }));
 
       function load() {
@@ -268,34 +226,34 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
   }, {
     key: "write",
     value: function () {
-      var _write = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(context, _ref, data) {
+      var _write = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(context, _ref, data) {
         var id, currentTime;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 id = _ref.id;
-                _context3.next = 3;
+                _context2.next = 3;
                 return this.player.videoContainer.currentTime();
 
               case 3:
-                currentTime = _context3.sent;
+                currentTime = _context2.sent;
                 this.player.log.debug("Logging event for video id ".concat(id, " at time: ").concat(currentTime));
-                _context3.t0 = data.event;
-                _context3.next = _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAY ? 8 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PAUSE ? 10 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.ENDED ? 12 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.FULLSCREEN_CHANGED ? 14 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYER_LOADED ? 16 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SHOW_POPUP ? 18 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.HIDE_POPUP ? 20 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SEEK ? 22 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.VOLUME_CHANGED ? 24 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.RESIZE_END ? 26 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.CAPTIONS_CHANGED ? 28 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYBACK_RATE_CHANGED ? 30 : 33;
+                _context2.t0 = data.event;
+                _context2.next = _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAY ? 8 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PAUSE ? 10 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.ENDED ? 12 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.FULLSCREEN_CHANGED ? 14 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYER_LOADED ? 16 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SHOW_POPUP ? 18 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.HIDE_POPUP ? 20 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SEEK ? 22 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.VOLUME_CHANGED ? 24 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.RESIZE_END ? 26 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.CAPTIONS_CHANGED ? 28 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYBACK_RATE_CHANGED ? 30 : 33;
                 break;
 
               case 8:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Play', this.loadTitle());
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 10:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Pause', this.loadTitle());
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 12:
                 this.player.matomotracker.trackEvent('Player.Status', 'Ended', this.loadTitle());
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 14:
                 if (data.params.status == true) {
@@ -304,47 +262,47 @@ var matomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
                   this.player.matomotracker.trackEvent('Player.View', 'ExitFullscreen', this.loadTitle());
                 }
 
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 16:
                 this.player.matomotracker.trackEvent('Player.Status', 'LoadComplete', this.loadTitle());
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 18:
                 this.player.matomotracker.trackEvent('Player.PopUp', 'Show', data.params.plugin.name);
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 20:
                 this.player.matomotracker.trackEvent('Player.PopUp', 'Hide', data.params.plugin.name);
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 22:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Seek', Math.round(data.params.newTime));
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 24:
                 this.player.matomotracker.trackEvent('Player.Settings', 'Volume', data.params.volume);
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 26:
                 this.player.matomotracker.trackEvent('Player.View', 'Resize', "".concat(data.params.size.w, "x").concat(data.params.size.h));
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 28:
                 this.player.matomotracker.trackEvent('Player.Captions', 'Enabled', data);
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 30:
                 this.player.log.info('Playbackrate changed!');
                 this.player.matomotracker.trackEvent('Player.Controls', 'PlaybackRate', data.params.newPlaybackRate);
-                return _context3.abrupt("break", 33);
+                return _context2.abrupt("break", 33);
 
               case 33:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee2, this);
       }));
 
       function write(_x, _x2, _x3) {
@@ -546,4 +504,4 @@ function getMatomoPluginContext() {
 /******/ })()
 ;
 });
-//# sourceMappingURL=matomoTrackingDataPlugin.js.map
+//# sourceMappingURL=paella-matomo-plugin.js.map

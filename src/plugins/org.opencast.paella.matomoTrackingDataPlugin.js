@@ -22,19 +22,6 @@
 
  export default class matomoTrackingDataPlugin extends DataPlugin {
  
-   async isEnabled() {
-     try {
-       const response = await fetch('/usertracking/detailenabled');
-       const data = await response.text();
-       const enabled = /true/i.test(data);
- 
-       return enabled;
-     }
-     catch(e) {
-       return false;
-     }
-   }
- 
    async load(){
      const client_id = this.config.client_id;
      const heartbeat = this.config.heartbeat;
@@ -67,7 +54,7 @@
      if (server.substr(-1) != '/') server += '/';
      await matomoScript(server + tracking_client + '.js');
      this.player.matomotracker = Matomo.getAsyncTracker( server + tracking_client + '.php', site_id );
-     //this.player.log.debug('Matomo Analytics Initialized: ' + Matomo.initialized);
+     this.player.log.debug('Matomo Analytics Initialized: ' + Matomo.initialized);
      this.player.matomotracker.client_id = client_id;
      if (heartbeat && heartbeat > 0) this.player.matomotracker.enableHeartBeatTimer(heartbeat);
      if (Matomo && Matomo.MediaAnalytics) {
