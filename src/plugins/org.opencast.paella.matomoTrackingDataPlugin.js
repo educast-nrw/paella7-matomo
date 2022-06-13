@@ -34,6 +34,7 @@
      let matomoPromise = null;
      const matomoScript = (path) => {
        if (!matomoPromise){
+         this.player.log.debug("starting to search for matomo.js script");
          matomoPromise = new Promise((resolve) => {
            const script = document.createElement('script');
            script.type = 'text/javascript';

@@ -80,10 +80,10 @@ var MatomoTracking = /*#__PURE__*/function (_PluginModule) {
 
 /***/ }),
 
-/***/ "./src/plugins/org.opencast.paella.matomoTrackingData.js":
-/*!***************************************************************!*\
-  !*** ./src/plugins/org.opencast.paella.matomoTrackingData.js ***!
-  \***************************************************************/
+/***/ "./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js":
+/*!*********************************************************************!*\
+  !*** ./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -369,7 +369,7 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
 
 var map = {
 	"./matomoTracking.js": "./src/plugins/matomoTracking.js",
-	"./org.opencast.paella.matomoTrackingData.js": "./src/plugins/org.opencast.paella.matomoTrackingData.js"
+	"./org.opencast.paella.matomoTrackingDataPlugin.js": "./src/plugins/org.opencast.paella.matomoTrackingDataPlugin.js"
 };
 
 
@@ -493,15 +493,11 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MatomoTrackingDataPlugin": () => (/* binding */ MatomoTrackingDataPlugin),
 /* harmony export */   "default": () => (/* binding */ getMatomoPluginContext)
 /* harmony export */ });
-/* harmony import */ var _plugins_org_opencast_paella_matomoTrackingData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/org.opencast.paella.matomoTrackingData */ "./src/plugins/org.opencast.paella.matomoTrackingData.js");
-
 function getMatomoPluginContext() {
   return __webpack_require__("./src/plugins sync recursive \\.js");
 }
-var MatomoTrackingDataPlugin = _plugins_org_opencast_paella_matomoTrackingData__WEBPACK_IMPORTED_MODULE_0__["default"];
 })();
 
 /******/ 	return __webpack_exports__;

@@ -22,6 +22,7 @@ config.devServer = {
 
 config.plugins.push(new HtmlWebpackPlugin({
     template: "src/index.html",
+    favicon: "./src/favicon.ico",
     inject: true
 }));
 
