@@ -9,6 +9,6 @@ const initParams = {
 
 let paella = new Paella('player-container', initParams);
 
-paella.loadManifest()
-    .then(() => console.log("done"))
-    .catch(e => console.error(e));
+ paella.loadManifest()
+     .then(() => console.log("done"))
+     .catch(e => console.error(e));

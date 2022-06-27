@@ -29,6 +29,18 @@
             ]
         },
 
+        "org.opencast.paella.opencast.matomoTrackingDataPlugin" :{
+            "enabled": true,
+            "client_id": "Paella Player 7",
+            "heartbeat": 30,
+            "server": "https://demo.matomo.cloud/",
+            "site_id": 2,
+            "tracking_client": "matomo",
+            "context": [
+                "userTracking"
+            ]
+        },
+
         "es.upv.paella.hlsVideoFormat": {
             "enabled": true,
             "order": 0,
@@ -63,18 +75,8 @@
 
         "es.upv.paella.defaultShortcuts": {
             "enabled": true
-        },
-
-        "org.opencast.paella.opencast.matomoTrackingDataPlugin" :{
-            "enabled": true,
-            "client_id": "Paella Player 7",
-            "heartbeat": 30,
-            "server": "https://demo.matomo.cloud/",
-            "site_id": 2,
-            "tracking_client": "matomo",
-            "context": [
-                "userTracking"
-            ]
         }
+
+
     }
 }

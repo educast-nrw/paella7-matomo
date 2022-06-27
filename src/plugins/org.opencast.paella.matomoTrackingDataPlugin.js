@@ -21,6 +21,20 @@
  import { DataPlugin, Events, bindEvent } from 'paella-core';
 
  export default class MatomoTrackingDataPlugin extends DataPlugin {
+
+  async isEnabled() {
+    // This is the CORRECT WAY to extend isEnabled() default behavior
+    if (!(await super.isEnabled())) {
+      return false;
+    }
+    else {
+      // Extend the isEnabled() funcionality
+      const response = await fetch('/usertracking/detailenabled');
+      const data = await response.text();
+      const enabled = /true/i.test(data);
+      return enabled;
+    }
+  }
  
    async load(){
      const client_id = this.config.client_id;

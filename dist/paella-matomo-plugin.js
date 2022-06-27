@@ -107,6 +107,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -155,13 +159,71 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
   }
 
   _createClass(MatomoTrackingDataPlugin, [{
-    key: "load",
+    key: "isEnabled",
     value: function () {
-      var _load = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var client_id, heartbeat, tracking_client, server, site_id, matomoPromise, matomoScript;
+      var _isEnabled = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var configEnabled, response, data, enabled;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _get(_getPrototypeOf(MatomoTrackingDataPlugin.prototype), "enabled", this).call(this);
+
+              case 2:
+                configEnabled = _context.sent;
+
+                if (configEnabled) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return", false);
+
+              case 5:
+                _context.prev = 5;
+                _context.next = 8;
+                return fetch('/usertracking/detailenabled');
+
+              case 8:
+                response = _context.sent;
+                _context.next = 11;
+                return response.text();
+
+              case 11:
+                data = _context.sent;
+                enabled = /true/i.test(data);
+                return _context.abrupt("return", enabled);
+
+              case 16:
+                _context.prev = 16;
+                _context.t0 = _context["catch"](5);
+                return _context.abrupt("return", false);
+
+              case 19:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[5, 16]]);
+      }));
+
+      function isEnabled() {
+        return _isEnabled.apply(this, arguments);
+      }
+
+      return isEnabled;
+    }()
+  }, {
+    key: "load",
+    value: function () {
+      var _load = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var _this = this;
+
+        var client_id, heartbeat, tracking_client, server, site_id, matomoPromise, matomoScript;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 client_id = this.config.client_id;
                 heartbeat = this.config.heartbeat;
@@ -172,6 +234,8 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
 
                 matomoScript = function matomoScript(path) {
                   if (!matomoPromise) {
+                    _this.player.log.debug("starting to search for matomo.js script");
+
                     matomoPromise = new Promise(function (resolve) {
                       var script = document.createElement('script');
                       script.type = 'text/javascript';
@@ -193,7 +257,7 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
                 };
 
                 if (server.substr(-1) != '/') server += '/';
-                _context.next = 10;
+                _context2.next = 10;
                 return matomoScript(server + tracking_client + '.js');
 
               case 10:
@@ -211,10 +275,10 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
 
               case 15:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function load() {
@@ -226,34 +290,34 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
   }, {
     key: "write",
     value: function () {
-      var _write = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(context, _ref, data) {
+      var _write = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(context, _ref, data) {
         var id, currentTime;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 id = _ref.id;
-                _context2.next = 3;
+                _context3.next = 3;
                 return this.player.videoContainer.currentTime();
 
               case 3:
-                currentTime = _context2.sent;
+                currentTime = _context3.sent;
                 this.player.log.debug("Logging event for video id ".concat(id, " at time: ").concat(currentTime));
-                _context2.t0 = data.event;
-                _context2.next = _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAY ? 8 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PAUSE ? 10 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.ENDED ? 12 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.FULLSCREEN_CHANGED ? 14 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYER_LOADED ? 16 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SHOW_POPUP ? 18 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.HIDE_POPUP ? 20 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SEEK ? 22 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.VOLUME_CHANGED ? 24 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.RESIZE_END ? 26 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.CAPTIONS_CHANGED ? 28 : _context2.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYBACK_RATE_CHANGED ? 30 : 33;
+                _context3.t0 = data.event;
+                _context3.next = _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAY ? 8 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PAUSE ? 10 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.ENDED ? 12 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.FULLSCREEN_CHANGED ? 14 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYER_LOADED ? 16 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SHOW_POPUP ? 18 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.HIDE_POPUP ? 20 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.SEEK ? 22 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.VOLUME_CHANGED ? 24 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.RESIZE_END ? 26 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.CAPTIONS_CHANGED ? 28 : _context3.t0 === paella_core__WEBPACK_IMPORTED_MODULE_0__.Events.PLAYBACK_RATE_CHANGED ? 30 : 33;
                 break;
 
               case 8:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Play', this.loadTitle());
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 10:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Pause', this.loadTitle());
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 12:
                 this.player.matomotracker.trackEvent('Player.Status', 'Ended', this.loadTitle());
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 14:
                 if (data.params.status == true) {
@@ -262,47 +326,47 @@ var MatomoTrackingDataPlugin = /*#__PURE__*/function (_DataPlugin) {
                   this.player.matomotracker.trackEvent('Player.View', 'ExitFullscreen', this.loadTitle());
                 }
 
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 16:
                 this.player.matomotracker.trackEvent('Player.Status', 'LoadComplete', this.loadTitle());
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 18:
                 this.player.matomotracker.trackEvent('Player.PopUp', 'Show', data.params.plugin.name);
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 20:
                 this.player.matomotracker.trackEvent('Player.PopUp', 'Hide', data.params.plugin.name);
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 22:
                 this.player.matomotracker.trackEvent('Player.Controls', 'Seek', Math.round(data.params.newTime));
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 24:
                 this.player.matomotracker.trackEvent('Player.Settings', 'Volume', data.params.volume);
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 26:
                 this.player.matomotracker.trackEvent('Player.View', 'Resize', "".concat(data.params.size.w, "x").concat(data.params.size.h));
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 28:
                 this.player.matomotracker.trackEvent('Player.Captions', 'Enabled', data);
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 30:
                 this.player.log.info('Playbackrate changed!');
                 this.player.matomotracker.trackEvent('Player.Controls', 'PlaybackRate', data.params.newPlaybackRate);
-                return _context2.abrupt("break", 33);
+                return _context3.abrupt("break", 33);
 
               case 33:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function write(_x, _x2, _x3) {
@@ -412,7 +476,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_paella_core__;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"module":"dist/paella-matomo-plugin.js","name":"paella7-matomo","version":"1.0.0","description":"Enables Matomo tracking in Paella player 7","main":"src/index.js","scripts":{"build":"webpack --mode development --config webpack.config.js","dev":"webpack serve --mode development --config webpack.debug.js"},"repository":{"type":"git","url":"git+https://github.com/educast-nrw/paella7-matomo.git"},"keywords":["paella","matomo","webplayer","webtracking"],"author":"Maximiliano Lira Del Canto","license":"ECL-2.0","bugs":{"url":"https://github.com/educast-nrw/paella7-matomo/issues"},"homepage":"https://github.com/educast-nrw/paella7-matomo#readme","dependencies":{"paella-core":"^1.0.51"},"devDependencies":{"@babel/core":"^7.12.16","@babel/preset-env":"^7.12.16","babel-loader":"^8.2.2","copy-webpack-plugin":"^7.0.0","css-loader":"^5.0.1","file-loader":"^6.2.0","html-webpack-plugin":"^4.5.1","style-loader":"^2.0.0","svg-inline-loader":"^0.8.2","webpack":"^5.66.0","webpack-cli":"^4.9.1","webpack-dev-server":"^4.7.3"}}');
+module.exports = JSON.parse('{"module":"dist/paella-matomo-plugin.js","name":"paella7-matomo","version":"1.0.0","description":"Enables Matomo tracking in Paella player 7","main":"index.js","scripts":{"build":"webpack --mode development --config webpack.config.js","dev":"webpack serve --mode development --config webpack.debug.js"},"repository":{"type":"git","url":"git+https://github.com/educast-nrw/paella7-matomo.git"},"keywords":["paella","matomo","webplayer","webtracking"],"author":"Maximiliano Lira Del Canto","license":"ECL-2.0","bugs":{"url":"https://github.com/educast-nrw/paella7-matomo/issues"},"homepage":"https://github.com/educast-nrw/paella7-matomo#readme","dependencies":{"paella-core":"^1.0.51"},"devDependencies":{"@babel/core":"^7.12.16","@babel/preset-env":"^7.12.16","babel-loader":"^8.2.2","copy-webpack-plugin":"^7.0.0","css-loader":"^5.0.1","file-loader":"^6.2.0","html-webpack-plugin":"^4.5.1","style-loader":"^2.0.0","svg-inline-loader":"^0.8.2","webpack":"^5.66.0","webpack-cli":"^4.9.1","webpack-dev-server":"^4.7.3"}}');
 
 /***/ })
 
